@@ -1,0 +1,14 @@
+first of all we create a certificate in master node, after that we use "scp" command to transfer certificates to other nodes, we change rabbitmq config files base on the advanced.conf in this repo[the access of the certificates should be change to 664].
+after that we add nodes to "/etc/hosts" in master, then create an admin user to be used for mannageing rabbitmq[the firewall on the port 22 and 5671 should be allowed].
+then for cluster nodes to be able to talk to each other we need to run command "cat /var/lib/rabbitmq/.erlang.cookie" in master, we will have an output like: "AFYDPNYXGNARCABLNENP",
+after that we add the master node output to slave nodes and override the defualt value.
+lastly we go to slave nodes commandline and run the following commands:
+{
+rabbitmqctl stop_app
+rabbitmqctl reset
+rabbitmqctl join_cluster rabbit@rabbitmq-1
+rabbitmqctl start_app
+}
+
+finally we can make sure the cluster is up by the bellow command:
+rabbitmq cluster_status
