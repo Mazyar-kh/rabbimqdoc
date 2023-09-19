@@ -12,3 +12,7 @@ rabbitmqctl start_app
 
 finally we can make sure the cluster is up by the bellow command:
 rabbitmq cluster_status
+
+
+[after compliting above commands we should've an rabbitmq cluster which its nodes should be able to comunicate via ssl, in addition of managment,senders and recivers.]
+[refernce:https://gist.github.com/pobsuwan/22aa4a9e0a217d22e12800a432933881]
